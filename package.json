@@ -1,0 +1,25 @@
+{
+    "name": "npm",
+    "private": true,
+    "version": "0.0.0",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "axios": "^0.24.0",
+        "core-js": "^3.6.5",
+        "element-plus": "^1.0.2-beta.71",
+        "nprogress": "^0.2.0",
+        "vue": "^3.2.25",
+        "vue-i18n": "^8.26.8",
+        "vue-router": "^4.0.0-0",
+        "vuex": "^4.0.0-0"
+    },
+    "devDependencies": {
+        "@types/node": "^17.0.35",
+        "@vitejs/plugin-vue": "^2.2.0",
+        "vite": "^2.8.0"
+    }
+}
