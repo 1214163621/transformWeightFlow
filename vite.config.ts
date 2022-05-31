@@ -15,7 +15,7 @@ export default defineConfig({
         }
     },
     optimizeDeps: {
-        include: ['axios'],
+        include: ['axios', 'schart.js'],
     },
     css: {
         postcss: {
