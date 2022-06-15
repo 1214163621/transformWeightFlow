@@ -45,15 +45,20 @@ export default defineConfig({
         port: 3005,
         host: "0.0.0.0",
         proxy: {
+            '/login': {
+                target: 'http://10.10.181.111:8077', //代理接口
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/login/, '')
+            },
             '/api': {
-                target: 'http://10.10.0.122:9300', //代理接口
+                target: 'http://10.10.181.111:8177', //代理接口
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, '')
             },
-            '/hk': {
-                target: 'http://10.10.181.60:11077', //代理接口
+            '/file': {
+                target: 'http://10.10.181.60:9099', //代理接口
                 changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/hk/, '')
+                rewrite: (path) => path.replace(/^\/file/, '')
             },
         }
     }

@@ -4,7 +4,7 @@
             <div class="ms-title">后台管理系统</div>
             <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
                 <el-form-item prop="username">
-                    <el-input v-model="param.username" placeholder="username">
+                    <el-input v-model="param.account" placeholder="account">
                         <template #prepend>
                             <el-button icon="el-icon-user"></el-button>
                         </template>
@@ -32,17 +32,18 @@ import { ref, reactive } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
+import { signin } from "../api"
 
 export default {
     setup() {
         const router = useRouter();
         const param = reactive({
-            username: "admin",
+            account: "gfj",
             password: "123456",
         });
 
         const rules = {
-            username: [
+            account: [
                 {
                     required: true,
                     message: "请输入用户名",
@@ -53,15 +54,27 @@ export default {
                 { required: true, message: "请输入密码", trigger: "blur" },
             ],
         };
-        const login :any = ref(null);
+        const login: any = ref(null);
         const submitForm = () => {
-            login.value.validate((valid: any) => {
+            login.value.validate(async (valid: any) => {
                 if (valid) {
-                    ElMessage.success("登录成功");
-                    localStorage.setItem("ms_username", param.username);
-                    router.push("/");
+                    console.log(param);
+                    try {
+                        const res = await signin(param)
+                        if (res.token) {
+                            console.log(res.token);
+                            ElMessage.success("登陆成功");
+                            localStorage.setItem("ms_username", param.account);
+                            localStorage.setItem("ms_token", res.token);
+                            router.push("/text");
+                        } else {
+                            ElMessage.error(res.msg);
+                        }
+                    } catch (e) {
+                        ElMessage.error(e.message);
+                    }
                 } else {
-                    ElMessage.error("登录成功");
+                    ElMessage.error("登录异常");
                     console.log(111);
                     return false;
                 }
@@ -86,9 +99,10 @@ export default {
     position: relative;
     width: 100%;
     height: 100%;
-    background-image: url(../assets/img/login-bg.jpg);
+    /* background-image: url(../assets/img/login-bg.jpg); */
     background-size: 100%;
 }
+
 .ms-title {
     width: 100%;
     line-height: 50px;
@@ -97,6 +111,7 @@ export default {
     color: #fff;
     border-bottom: 1px solid #ddd;
 }
+
 .ms-login {
     position: absolute;
     left: 50%;
@@ -107,17 +122,21 @@ export default {
     background: rgba(255, 255, 255, 0.3);
     overflow: hidden;
 }
+
 .ms-content {
     padding: 30px 30px;
 }
+
 .login-btn {
     text-align: center;
 }
+
 .login-btn button {
     width: 100%;
     height: 36px;
     margin-bottom: 10px;
 }
+
 .login-tips {
     font-size: 12px;
     line-height: 30px;

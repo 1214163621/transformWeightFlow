@@ -12,3 +12,8 @@ declare module 'vue-schart'{
 declare module '../api/index'{
 
 }
+declare module 'axios' {
+  interface AxiosInstance {
+      (config: AxiosRequestConfig): Promise<any>
+  }
+}

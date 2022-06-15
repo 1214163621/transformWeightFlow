@@ -3,7 +3,7 @@ import Home from "../views/Home.vue";
 
 const routes = [{
     path: '/',
-    redirect: '/text'
+    redirect: '/login'
 }, {
     path: "/",
     name: "Home",
@@ -24,8 +24,17 @@ const routes = [{
                 title: '系统首页'
             },
             component: () =>
-                import ( /* webpackChunkName: "dashboard" */ "../views/text.vue")
+                import ( /* webpackChunkName: "dashboard" */ "../views/Text.vue")
         },
+        {
+            path: "/upload",
+            name: "upload",
+            meta: {
+                title: '上传插件'
+            },
+            component: () =>
+                import ( /* webpackChunkName: "upload" */ "../views/Upload.vue")
+        }
         // {
         //     path: "/table",
         //     name: "basetable",
