@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
-
+import createStore from "../store/index";
 const routes = [{
     path: '/',
     redirect: '/login'
@@ -34,6 +34,60 @@ const routes = [{
             },
             component: () =>
                 import ( /* webpackChunkName: "upload" */ "../views/Upload.vue")
+        },
+        {
+            path: "/base",
+            name: "base",
+            meta: {
+                title: '基础资料'
+            },
+            component: () =>
+                import ( /* webpackChunkName: "upload" */ "../views/Base.vue")
+        },
+        {
+            path: "/table",
+            name: "basetable",
+            meta: {
+                title: '表格'
+            },
+            component: () =>
+                import ( /* webpackChunkName: "table" */ "../views/BaseTable.vue")
+        },
+        {
+            path: "/search",
+            name: "search",
+            meta: {
+                title: '首称多条件查询'
+            },
+            component: () =>
+                import ( /* webpackChunkName: "table" */ "../views/Search.vue")
+        },
+        {
+            path: "/searchcal",
+            name: "searchcal",
+            meta: {
+                title: '理算多条件查询'
+            },
+            component: () =>
+                import ( /* webpackChunkName: "table" */ "../views/Searchcal.vue")
+        },
+        {
+            path: "/scroll",
+            name: "scroll",
+            meta: {
+                title: '滚动'
+            },
+            component: () =>
+                import ( /* webpackChunkName: "table" */ "../views/Scroll.vue")
+        },
+        {
+            path: "/material",
+            name: "material",
+            meta: {
+                title: '物料数据'
+            },
+            component: () =>
+                import ( /* webpackChunkName: "table" */ "../views/Material.vue")
         }
         // {
         //     path: "/table",
@@ -160,15 +214,35 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     document.title = `${to.meta.title} | vue-manage-system`;
     const role = localStorage.getItem('ms_username');
-    if (!role && to.path !== '/login') {
-        next('/login');
-    } else if (to.meta.permission) {
-        // 如果是管理员权限则可进入，这里只是简单的模拟管理员权限而已
-        role === 'admin' ?
-            next() :
-            next('/403');
-    } else {
+    if (to.path == '/login' || to.path == '/register') {
+        sessionStorage.removeItem('token');
+        console.log('rmtoken');
         next();
+    } else {
+        dealPermission()
+    }
+    // if (!role && to.path !== '/login') {
+    //     next('/login');
+    // } else if (to.meta.permission) {
+    //     // 如果是管理员权限则可进入，这里只是简单的模拟管理员权限而已
+    //     role === 'admin' ?
+    //         next() :
+    //         next('/403');
+    // } else {
+    //     next();
+    // }
+
+    async function dealPermission() {
+        const res = await createStore.dispatch("dealPermission")
+        if (res) {
+            let token = sessionStorage.getItem('ms_token');
+            if (!token) {
+                next({ path: '/login' })
+                return;
+            } else {
+                next()
+            }
+        }
     }
 });
 

@@ -46,12 +46,14 @@ export default defineConfig({
         host: "0.0.0.0",
         proxy: {
             '/login': {
-                target: 'http://10.10.181.111:8077', //代理接口
+                target: 'http://10.10.181.111:8878', //代理接口
+                // target: 'http://10.10.6.180:31077', //代理接口
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/login/, '')
             },
             '/api': {
-                target: 'http://10.10.181.111:8177', //代理接口
+                target: 'http://10.10.181.111:8877', //代理接口
+                // target: 'http://10.10.6.180:31177', //代理接口
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, '')
             },

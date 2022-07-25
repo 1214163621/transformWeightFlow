@@ -16,20 +16,20 @@
         <el-table-column prop="MaterialType" label="供应类型" width="80" align="center"></el-table-column>
         <el-table-column prop="MaterialCode" label="物料编码" width="150" align="center"></el-table-column>
         <el-table-column prop="MaterialName" label="物料名称" width="80" align="center"></el-table-column>
-        <el-table-column prop="Specifications" label="规格型号 " width="170" align="center"></el-table-column>
+        <el-table-column prop="Specifications" label="规格型号 " width="140" align="center"></el-table-column>
         <el-table-column prop="Supplier" label="供应商" width="80" align="center"></el-table-column>
         <el-table-column prop="Craft" label="工艺" width="150" align="center"></el-table-column>
         <el-table-column prop="Texture" label="材质" width="100" align="center"></el-table-column>
         <el-table-column prop="Process" label="工序" width="50" align="center"></el-table-column>
         <el-table-column prop="PurchaseStatus" label="采购状态" width="150" align="center"></el-table-column>
         <el-table-column prop="ReceivingWarehouse" label="收料仓库" width="100" align="center"></el-table-column>
-        <el-table-column prop="WeighStage" label="理算类别" width="100" align="center"></el-table-column>
+        <el-table-column prop="WeighStage" label="称重状态" width="100" align="center"></el-table-column>
 
         <el-table-column prop="CalPerson" label="结算人" width="100" align="center" :formatter="recordLogData">
         </el-table-column>
         <el-table-column prop="CalWeight" label="结算重量" width="80" align="center" :formatter="recordLogData">
         </el-table-column>
-        <el-table-column prop="CalTime" label="结算时间" width="100" align="center" :formatter="recordLogData">
+        <el-table-column prop="CalTime" label="执行日期" width="100" align="center" :formatter="recordLogData">
         </el-table-column>
         <!-- <el-table-column prop="name" label="用户名"></el-table-column>
         <el-table-column label="账户余额">
@@ -71,7 +71,7 @@
     </div>
   </div>
 </template>
-<script lang="ts" setup>
+<script  setup>
 // import { reactive, toRefs, onBeforeMount, onMounted } from 'vue'
 import { ref, reactive, pushScopeId } from "vue";
 import { ElMessage, ElMessageBox } from "element-plus";
@@ -90,7 +90,7 @@ const query = reactive({
   pageIndex: 1,
   pageSize: 5,
 });
-let material_arr: Array<Array<any>> = reactive([]);
+let material_arr = reactive([]);
 const tableData = ref([]);
 const pageTotal = ref(0);
 const recordLogData = (row, column) => {
@@ -190,7 +190,7 @@ const getData = async () => {
       flow_arr.push(...element)
     })
     tableData.value = flow_arr;
-    console.log(flow_arr)
+    // console.log(flow_arr)
   } catch (e) {
     console.log(e)
   }
@@ -238,14 +238,14 @@ const handleSearch = () => {
   getData();
 };
 // 分页导航
-const handlePageChange = (val: number) => {
+const handlePageChange = (val) => {
   query.pageIndex = val;
   arraySpanMethod_param.i = 0
   arraySpanMethod_param.newrowindex = 0
   getData();
 };
 // 分页大小改变
-const handleSizeChange = (val: number) => {
+const handleSizeChange = (val) => {
   query.pageSize = val;
   arraySpanMethod_param.i = 0
   arraySpanMethod_param.newrowindex = 0
@@ -253,7 +253,7 @@ const handleSizeChange = (val: number) => {
 };
 
 // 删除操作
-const handleDelete = (index: number) => {
+const handleDelete = (index) => {
   // 二次确认删除
   ElMessageBox.confirm("确定要删除吗？", "提示", {
     type: "warning",
@@ -271,7 +271,7 @@ let form = reactive({
   address: "",
 });
 let idx = -1;
-const handleEdit = (index: number, row: { [x: string]: any; }) => {
+const handleEdit = (index, row) => {
   idx = index;
   Object.keys(form).forEach((item) => {
     form[item] = row[item];

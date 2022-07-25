@@ -5,7 +5,7 @@
             <i v-if="!collapse" class="el-icon-s-fold"></i>
             <i v-else class="el-icon-s-unfold"></i>
         </div>
-        <div class="logo">后台管理系统</div>
+        <div class="logo">物料称重系统</div>
         <div class="header-right">
             <div class="header-user-con">
                 <!-- 消息中心 -->
@@ -32,8 +32,9 @@
                             <!-- <a href="https://github.com/lin-xin/vue-manage-system" target="_blank">
                                 <el-dropdown-item>项目仓库</el-dropdown-item>
                             </a> -->
-                            <el-dropdown-item command="user">个人中心</el-dropdown-item>
-                            <el-dropdown-item divided command="loginout">退出登录</el-dropdown-item>
+                            <!-- <el-dropdown-item command="user">个人中心</el-dropdown-item> -->
+                            <!-- <el-dropdown-item divided command="loginout">退出登录</el-dropdown-item> -->
+                            <el-dropdown-item  command="loginout">退出登录</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
@@ -47,11 +48,11 @@ import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 export default {
     setup() {
-        const username = localStorage.getItem("ms_username");
+        const username = sessionStorage.getItem("ms_username");
         const message = 2;
 
         const store = useStore();
-        const collapse = computed(() => store.state.collapse);
+        const collapse = computed(() => store.state.layout_module.collapse);
         // 侧边栏折叠
         const collapseChage = () => {
             store.commit("handleCollapse", !collapse.value);

@@ -1,10 +1,10 @@
 <template>
     <div class="login-wrap">
         <div class="ms-login">
-            <div class="ms-title">后台管理系统</div>
+            <div class="ms-title">物料称重系统</div>
             <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
-                <el-form-item prop="username">
-                    <el-input v-model="param.account" placeholder="account">
+                <el-form-item prop="user_name">
+                    <el-input v-model="param.user_name" placeholder="account">
                         <template #prepend>
                             <el-button icon="el-icon-user"></el-button>
                         </template>
@@ -19,31 +19,49 @@
                     </el-input>
                 </el-form-item>
                 <div class="login-btn">
-                    <el-button type="primary" @click="submitForm()">登录</el-button>
+                    <el-button type="primary" @click="submitForm()" >登录</el-button>
                 </div>
-                <p class="login-tips">Tips : 用户名和密码随便填。</p>
+                <!-- <p class="login-tips">Tips : 用户名和密码随便填。</p> -->
             </el-form>
         </div>
     </div>
 </template>
 
-<script lang="ts">
+<script>
 import { ref, reactive } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
 import { signin } from "../api"
-
 export default {
     setup() {
+        // console.log(navigator.userAgent);
+        // localStorage.setItem('uuid',)
+        // const uuid = async () => {
+        //     if (window.requestIdleCallback) {
+        //         requestIdleCallback(() => {
+        //             this.createFingerprint();
+        //         });
+        //     } else {
+        //         setTimeout(() => {
+        //             this.createFingerprint();
+        //         }, 500);
+        //     }
+        // }
+        // uuid()
+
         const router = useRouter();
+        // const param = reactive({
+        //     user_name: "admin",
+        //     password: "123456",
+        // });
         const param = reactive({
-            account: "gfj",
-            password: "123456",
+            user_name: "",
+            password: "",
         });
 
         const rules = {
-            account: [
+            user_name: [
                 {
                     required: true,
                     message: "请输入用户名",
@@ -54,9 +72,9 @@ export default {
                 { required: true, message: "请输入密码", trigger: "blur" },
             ],
         };
-        const login: any = ref(null);
+        const login = ref(null);
         const submitForm = () => {
-            login.value.validate(async (valid: any) => {
+            login.value.validate(async (valid) => {
                 if (valid) {
                     console.log(param);
                     try {
@@ -64,13 +82,15 @@ export default {
                         if (res.token) {
                             console.log(res.token);
                             ElMessage.success("登陆成功");
-                            localStorage.setItem("ms_username", param.account);
-                            localStorage.setItem("ms_token", res.token);
-                            router.push("/text");
+                            sessionStorage.setItem("ms_username", param.user_name);
+                            sessionStorage.setItem("ms_token", res.token);
+                            console.log('token');
+                            router.push("/search");
                         } else {
                             ElMessage.error(res.msg);
                         }
                     } catch (e) {
+                        console.log(e);
                         ElMessage.error(e.message);
                     }
                 } else {

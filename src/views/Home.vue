@@ -1,7 +1,7 @@
 <template>
     <div class="about">
         <v-header />
-        <!-- <v-sidebar /> -->
+        <v-sidebar />
         <div class="content-box" :class="{ 'content-collapse': collapse }">
             <v-tags></v-tags>
             <div class="content">
@@ -17,7 +17,7 @@
         </div>
     </div>
 </template>
-<script lang="ts">
+<script >
 import { computed } from "vue";
 import { useStore } from "vuex";
 import vHeader from "../components/Header.vue";
@@ -32,9 +32,9 @@ export default {
     setup() {
         const store = useStore();
         const tagsList = computed(() =>
-            store.state.tagsList.map((item: { name: any; }) => item.name)
+            store.state.layout_module.tagsList.map((item) => item.name)
         );
-        const collapse = computed(() => store.state.collapse);
+        const collapse = computed(() => store.state.layout_module.collapse);
         return {
             tagsList,
             collapse,

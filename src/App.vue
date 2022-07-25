@@ -9,4 +9,8 @@ export default {};
 <style>
 @import "./assets/css/main.css";
 @import "./assets/css/color-dark.css";
+
+#nprogress .bar {
+    background: red !important;
+}
 </style>

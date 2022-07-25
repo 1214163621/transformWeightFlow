@@ -114,7 +114,7 @@
     </div>
 </template>
 
-<script lang="ts">
+<script >
 import Schart from "vue-schart";
 import { reactive } from "vue";
 export default {
