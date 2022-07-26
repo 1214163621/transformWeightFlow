@@ -17,15 +17,15 @@ const routes = [{
             component: () =>
                 import ( /* webpackChunkName: "dashboard" */ "../views/Dashboard.vue")
         },
-        {
-            path: "/text",
-            name: "text",
-            meta: {
-                title: '系统首页'
-            },
-            component: () =>
-                import ( /* webpackChunkName: "dashboard" */ "../views/Text.vue")
-        },
+        // {
+        //     path: "/text",
+        //     name: "text",
+        //     meta: {
+        //         title: '系统首页'
+        //     },
+        //     component: () =>
+        //         import ( /* webpackChunkName: "dashboard" */ "../views/Text.vue")
+        // },
         {
             path: "/upload",
             name: "upload",
