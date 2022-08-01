@@ -79,11 +79,11 @@ export default {
                     console.log(param);
                     try {
                         const res = await signin(param)
-                        if (res.token) {
-                            console.log(res.token);
+                        if (res.data) {
+                            console.log(res.data);
                             ElMessage.success("登陆成功");
                             sessionStorage.setItem("ms_username", param.user_name);
-                            sessionStorage.setItem("ms_token", res.token);
+                            sessionStorage.setItem("ms_token", res.data);
                             console.log('token');
                             router.push("/search");
                         } else {

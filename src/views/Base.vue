@@ -30,7 +30,7 @@
                                 <el-popconfirm title="确定要删除吗？" @confirm="remove(item.Id, 'craft')">
                                     <template #reference>
                                         <i class="el-icon-lx-delete" style="position: absolute; right: 0;"
-                                            v-permission="'/weight/craft/* DELETE'"></i>
+                                            v-permission="'/weight/craft DELETE'"></i>
                                     </template>
                                 </el-popconfirm>
                                 <hr class="hr" style="margin-top: 10px;" />
@@ -56,7 +56,7 @@
                                 <el-popconfirm title="确定要删除吗？" @confirm="remove(item.Id, 'texture')">
                                     <template #reference>
                                         <i class="el-icon-lx-delete" style="position: absolute; right: 0;"
-                                            v-permission="'/weight/texture/* DELETE'"></i>
+                                            v-permission="'/weight/texture DELETE'"></i>
                                     </template>
                                 </el-popconfirm>
                                 <hr class="hr" style="margin-top: 10px;" />
@@ -82,7 +82,7 @@
                                 <el-popconfirm title="确定要删除吗？" @confirm="remove(item.Id, 'process')">
                                     <template #reference>
                                         <i class="el-icon-lx-delete" style="position: absolute; right: 0;"
-                                            v-permission="'/weight/process/* DELETE'"></i>
+                                            v-permission="'/weight/process DELETE'"></i>
                                     </template>
                                 </el-popconfirm>
                                 <hr class="hr" style="margin-top: 10px;" />
@@ -108,7 +108,7 @@
                                 <el-popconfirm title="确定要删除吗？" @confirm="remove(item.Id, 'purchase_status')">
                                     <template #reference>
                                         <i class="el-icon-lx-delete" style="position: absolute; right: 0;"
-                                            v-permission="'/weight/purchase_status/* DELETE'"></i>
+                                            v-permission="'/weight/purchase_status DELETE'"></i>
                                     </template>
                                 </el-popconfirm>
                                 <hr class="hr" style="margin-top: 10px;" />
@@ -203,8 +203,8 @@ getbase()
 // getbase()
 // 双击文本编辑
 const doubleclick = (e, id, type) => {
-    // console.log(createStore.state.main.permission.indexOf(`/weight/${type}/* PUT`))
-    if (createStore.state.main.permission.indexOf(`/weight/${type}/* PUT`) < 0) {
+    // console.log(createStore.state.main.permission.indexOf(`/weight/${type} PUT`))
+    if (createStore.state.main.permission.indexOf(`/weight/${type} PUT`) < 0) {
         ElMessage.error('没有权限')
         return
     }
