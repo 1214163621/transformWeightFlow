@@ -70,6 +70,7 @@
                                         <el-checkbox v-model="showColumn.MaterialCode" disabled>物料编码</el-checkbox>
                                         <el-checkbox v-model="showColumn.MaterialName">物料名称</el-checkbox>
                                         <el-checkbox v-model="showColumn.MaterialType">供应类型</el-checkbox>
+                                        <el-checkbox v-model="showColumn.Craft">工艺</el-checkbox>
                                         <el-checkbox v-model="showColumn.Process">工序</el-checkbox>
                                         <el-checkbox v-model="showColumn.PurchaseStatus">采购状态</el-checkbox>
                                         <el-checkbox v-model="showColumn.ReceivingWarehouse">收料仓库</el-checkbox>
@@ -99,6 +100,7 @@
                 <el-table-column prop="MaterialName" label="物料名称" width="100" v-if="showColumn.MaterialName">
                 </el-table-column>
                 <el-table-column prop="MaterialType" label="供应类型" v-if="showColumn.MaterialType"></el-table-column>
+                <el-table-column prop="Craft" label="工艺" v-if="showColumn.Craft"></el-table-column>
                 <el-table-column prop="Process" label="工序" v-if="showColumn.Process"></el-table-column>
                 <el-table-column prop="PurchaseStatus" label="采购状态" v-if="showColumn.PurchaseStatus"></el-table-column>
                 <el-table-column prop="ReceivingWarehouse" label="收料仓库" width="150"
@@ -164,6 +166,7 @@ const showColumn = reactive({
     MaterialCode: true,
     MaterialName: true,
     MaterialType: true,
+    Craft: true,
     Process: true,
     PurchaseStatus: true,
     ReceivingWarehouse: true,
