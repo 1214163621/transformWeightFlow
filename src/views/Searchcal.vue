@@ -116,7 +116,7 @@
                 </el-table-column>
                 <el-table-column label="是否有效" align="center" v-if="showColumn.Validate">
                     <template #default="scope">
-                        <el-tag :type="scope.row.Validate ? 'success' : 'danger'">{{ scope.row.Validate ? '有效' : '失效' }}
+                        <el-tag :type="scope.row.Validate === 'true' ? 'success' : 'danger'">{{ scope.row.Validate === 'true' ? '有效' : '失效' }}
                         </el-tag>
                     </template>
                 </el-table-column>

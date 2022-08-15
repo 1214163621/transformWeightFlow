@@ -14,6 +14,9 @@
                     <el-form-item prop="material_code">
                         <el-input v-model="query.material_code" placeholder="物料代码" class="mr10"></el-input>
                     </el-form-item>
+                    <el-form-item prop="supplier">
+                        <el-input v-model="query.supplier" placeholder="供应商名称" class="mr10"></el-input>
+                    </el-form-item>
                     <el-form-item prop="craft">
                         <el-select v-model="query.craft" placeholder="工艺" class="handle-select mr10" clearable>
                             <el-option v-for="item in carddata.craft" :key="item.Name" :label="item.Name"
@@ -118,7 +121,7 @@
                 </el-table-column>
                 <el-table-column label="是否有效" align="center" v-if="showColumn.Validate">
                     <template #default="scope">
-                        <el-tag :type="scope.row.Validate ? 'success' : 'danger'">{{ scope.row.Validate ? '有效' : '失效' }}
+                        <el-tag :type="scope.row.Validate === 'true' ? 'success' : 'danger'">{{ scope.row.Validate === 'true' ? '有效' : '失效' }}
                         </el-tag>
                     </template>
                 </el-table-column>
